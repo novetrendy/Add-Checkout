@@ -3,14 +3,14 @@
 Plugin Name: Add Checkout
 Plugin URI: http://webstudionovetrendy.eu/
 Description: Add a buttons "continue shopping" and "empty cart" and the custom text on the cart page
-Version: 1.1
+Version: 160424
 Author: Webstudio Nove Trendy
 Author URI: http://webstudionovetrendy.eu/
 Text Domain: add-checkout
 DomainPath: /includes/languages/
 License: Free to use and adapt
 WC requires at least: 2.3
-WC tested up to: 2.4
+WC tested up to: 2.5
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -54,22 +54,22 @@ add_action('login_enqueue_scripts', 'addcheckout_admin_theme_style');
  * Přidáme stránku do menu
  */
 
-add_action( 'admin_menu', 'nt_admin_menu' );
-function nt_admin_menu() {
-	add_menu_page( __('New Trends','add-checkout'), __('New Trends','add-checkout'), 'manage_options', 'add-checkout-admin-page', 'nt_add_checkout_page', 'dashicons-admin-tools', 3  );
+add_action( 'admin_menu', 'nt_add_checkout_admin_menu' );
+function nt_add_checkout_admin_menu() {
+    if ( empty ( $GLOBALS['admin_page_hooks']['nt-admin-page'] ) ) {
+	add_menu_page( __('New Trends','add-checkout'), __('New Trends','add-checkout'), 'manage_options', 'nt-admin-page', 'nt_add_checkout_page', 'dashicons-admin-tools', 3  );
 }
-
-
+}
 
 function nt_add_checkout_page() {
     echo '<h1>' . __( 'Mainpage for setting plugins from New Trends', 'add-checkout' ) . '</h1>';
-    echo '<img alt="WebStudio New Trends" class="ntlogo" src=" '. plugin_dir_url( __FILE__ ) .'images/logo.png" /><br />';
-    do_action('addcheckout_after_main_content_admin_page_loop_action');
+    echo '<a target="_blank" title="' .  __('WebStudio New Trends','add-checkout') . '" href="http://webstudionovetrendy.eu"><img alt="' .  __('WebStudio New Trends','add-checkout') . '" title="' .  __('WebStudio New Trends','add-checkout') . '" class="ntlogo" src=" '. plugin_dir_url( __FILE__ ) .'images/logo.png" /><br /></a><hr />';
+    do_action('nt_after_main_content_admin_page_loop_action');
  }
-add_action('addcheckout_after_main_content_admin_page_loop_action', 'addcheckout_print_details');
+add_action('nt_after_main_content_admin_page_loop_action', 'addcheckout_print_details');
 
 function addcheckout_print_details(){
-  echo  '<hr /><br /><a href="' . admin_url(). 'admin.php?page=add_checkout">Add Checkout</a><br /><p>'. __( 'Plugin Add Checkout adds two notes and two buttons to cart page', 'add-checkout' ) .'</p><br /><hr />';
+  echo  '<br /><a href="' . admin_url(). 'admin.php?page=add_checkout">Add Checkout</a><br /><p>'. __( 'Plugin Add Checkout adds two notes and two buttons to cart page', 'add-checkout' ) .'</p><br /><hr />';
 }
 
 /**
