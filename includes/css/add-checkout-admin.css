@@ -1,0 +1,9 @@
+input[type="text"][name="nt_notes[nt_note_1]"],input[type="text"][name="nt_notes[nt_note_2]"] {
+     width: 90%;
+     box-sizing: border-box;
+     -webkit-box-sizing:border-box;
+     -moz-box-sizing: border-box;
+}
+.ntlogo { margin:30px 33%; }
+.nt_note_1, .nt_note_2{ display: none; }
+/* th { width:20% !important; } */
